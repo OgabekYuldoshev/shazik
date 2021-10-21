@@ -1,5 +1,4 @@
 require("dotenv").config();
-const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
 // const {setUser} = require("./middleware/auth")
@@ -21,7 +20,6 @@ mongoose
 // View Engine
 
 const app = express();
-const server = http.createServer(app);
 const expressLayouts = require("express-ejs-layouts");
 const passport = require("passport");
 const flash = require("express-flash");
@@ -53,6 +51,6 @@ app.use(routes);
 
 
 
-server.listen("3000" || process.env.PORT, () =>
+app.listen("3000" || process.env.PORT, () =>
   console.log("Server Running ...")
 );
