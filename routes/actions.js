@@ -14,14 +14,14 @@ module.exports = (route) => {
   // Authentification
   route.post("/reg", async (req, res) => {
     if (!req.body.regKey && req.body.regkey !== process.env.REG_KEY) {
-      res.status(401).send("Not Alllowed");
+      res.status(401).send({msg:"Not Alllowed"});
     } else {
       try {
         if (req.body.password.length < 6) {
-          res.status(400).send("Password must be 6 chapter!");
+          res.status(400).send({msg:"Password must be 6 chapter!"});
         }
         if (req.body.password.includes(" ")) {
-          res.status(400).send("Password must not be space!");
+          res.status(400).send({msg:"Password must not be space!"});
         }
         const hashPassword = await bcrypt.hash(req.body.password, 10);
         await User.create({
@@ -30,7 +30,7 @@ module.exports = (route) => {
           password: hashPassword,
         })
           .then(() => {
-            res.status(201).send("New User Created");
+            res.status(201).send({msg:"New User Created"});
           })
           .catch((err) => res.status(400).send(err));
       } catch (error) {
@@ -44,7 +44,7 @@ module.exports = (route) => {
     "/login",
     checkNotAuthenticated,
     passport.authenticate("local", {
-      successRedirect: "/",
+      successRedirect: "/dashboard",
       failureRedirect: "/login",
       failureFlash: true,
     })
