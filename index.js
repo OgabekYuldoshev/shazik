@@ -51,6 +51,6 @@ app.use('/', routes);
 
 
 
-app.listen("3000" || process.env.PORT, () =>
+app.listen(3000 || process.env.PORT, () =>
   console.log("Server Running ...")
 );
