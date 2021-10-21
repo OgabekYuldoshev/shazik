@@ -1,0 +1,17 @@
+<div class="card bg-gray-300 grid items-center gap-4 p-4 shadow-xl bg-base-100 rounded-box flex-shrink-0 col-span-3 row-span-3 mx-2 xl:mx-0 w-72 xl:w-auto xl:w-full">
+    <form onsubmit="changePassword(event)" method="post" action="/change-password" class="form-control">
+      <label class="label">
+        <span class="label-text">Username</span>
+      </label> 
+      <input type="text" placeholder="Enter your username" name="username" value="<%= user.username %> " class="input">
+      <label class="label">
+        <span class="label-text">Password</span>
+      </label> 
+      <input type="password" placeholder="Enter your fullname" name="password" class="input" required>
+      <label class="label">
+        <span class="label-text">Confirm password</span>
+      </label> 
+      <input type="password" placeholder="Enter your fullname" name="confirm" class="input" required>
+      <button type="submit" class="btn btn-outline mt-2">Save</button>
+    </form>
+</div>
