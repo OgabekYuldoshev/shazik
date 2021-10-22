@@ -9,6 +9,15 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    position:{
+        type: String,
+    },
+    email:{
+        type: String,
+    },
+    phone:{
+        type: String,
+    },
     fullname: {
         type: String,
         required: true
@@ -22,12 +31,27 @@ const UserSchema = new Schema({
     address: {
         type: String,
     },
-    // address: {
-    //     type: Arr,
-    //     required: true
-    // }
   });
 
-const User = mongoose.model("user", UserSchema);
+  const SkillsSchema = new Schema({
+      authorID: {
+          type: String,
+          required: true
+      },
+      name:{
+          type: String,
+          required: true
+      },
+      percent:{
+          type: Number,
+          min: 1,
+          max: 100,
+          required: true
+      }
+  })
 
-module.exports = { User };
+const User = mongoose.model("user", UserSchema);
+const Skills = mongoose.model("skills", SkillsSchema);
+
+
+module.exports = { User, Skills };

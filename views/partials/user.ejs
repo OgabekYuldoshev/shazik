@@ -1,76 +1,90 @@
-<div
-  class="
-    card
-    bg-gray-300
-    grid
-    items-center
-    gap-4
-    p-4
-    shadow-xl
-    bg-base-100
-    rounded-box
-    flex-shrink-0
-    col-span-6
-    row-span-6
-    mx-2
-    xl:mx-0
-    w-72
-    xl:w-auto xl:w-full
-  "
+<form
+  onsubmit="userUpdate(event)"
+  class="form-control flex flex-col w-full py-2 my-2 border-t gap-2"
 >
-  <form onsubmit="userUpdate(event)" class="form-control">
-    <div class="grid gap-5 grid-cols-2">
-      <div>
-        <label class="label">
-          <span class="label-text">Fullname</span>
-        </label>
-        <input
-          type="text"
-          value="<%= user.fullname %>"
-          placeholder="Enter your fullname"
-          name="fullname"
-          class="input w-full"
-        />
-      </div>
-      <div>
-        <label class="label">
-          <span class="label-text">Address</span>
-        </label>
-        <input
-          type="text"
-          value="<%= user.address %> "
-          placeholder="Enter your address"
-          name="address"
-          class="input w-full"
-        />
-      </div>
-    </div>
-    <div>
-      <label class="label">
-        <span class="label-text">Status</span>
-      </label>
-      <input
-        type="text"
-        value="<%= user.status %>"
-        placeholder="Enter your status"
-        name="status"
-        class="input w-full"
-      />
-    </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Fullname</span>
+    </label>
+    <input
+      type="text"
+      value="<%= user.fullname %>"
+      placeholder="Enter your fullname"
+      name="fullname"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Position</span>
+    </label>
+    <input
+      type="text"
+      value="<%= user.position %>"
+      placeholder="Enter your position"
+      name="position"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Email</span>
+    </label>
+    <input
+      type="email"
+      value="<%= user.email %>"
+      placeholder="Enter your email"
+      name="email"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Phone</span>
+    </label>
+    <input
+      type="text"
+      value="<%= user.phone %>"
+      placeholder="EX : +998 94 123 45 67"
+      name="phone"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Address</span>
+    </label>
+    <input
+      type="text"
+      value="<%= user.address %> "
+      placeholder="Enter your address"
+      name="address"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div>
+    <label class="label">
+      <span class="label-text">Status</span>
+    </label>
+    <input
+      type="text"
+      value="<%= user.status %>"
+      placeholder="Enter your status"
+      name="status"
+      class="input w-full input-sm rounded"
+    />
+  </div>
+  <div class="w-full">
     <label class="label">
       <span class="label-text">About</span>
     </label>
     <textarea
       name="about"
-      class="textarea h-24 textarea-bordered"
+      class="textarea h-24 textarea-bordered w-full"
       placeholder="Write about you"
-    ><%= user.about %></textarea>
-    <div class="flex gap-5 justify-between items-center mt-2">
-      <span class="text-gray-500">ID: 
-        <%= user._id %> 
-      </span>
-      <!-- <button type="reset" class="btn btn-outline btn-error">reset</button> -->
-      <button type="submit" class="btn btn-outline">Save</button>
-    </div>
-  </form>
-</div>
+    >
+<%= user.about %></textarea
+    >
+  </div>
+  <button type="submit" class="btn btn-outline btn-sm">Save</button>
+</form>

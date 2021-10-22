@@ -1,0 +1,14 @@
+<div class="p-5 rounded bg-white mt-4 flex flex-wrap items-center gap-4">
+        <% skills.forEach(skill => { %>
+            <div data-tip="Double-click to Delete!" class="tooltip">
+                <button ondblclick="delete_skill('<%= skill._id %>')" class="btn btn-primary">
+                    <%= skill.name %> <%= skill.percent %>% 
+                </button>
+            </div>
+        <% }) %>
+    <form onsubmit="add_skills(event)" class="flex gap-2">
+        <input name="name" class="rounded" type="text" placeholder="skills" required>
+        <input name="percent" class="rounded w-16" min="1" max="100" type="number" placeholder="0" required>
+        <button type="submit" class="w-10 flex items-center justify-center focus:outline-none border-2 hover:border-primary rounded"><i class="fas fa-plus"></i></button>
+    </form>
+</div>

@@ -2,14 +2,19 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("../middleware/checkUser");
-const { User } = require("../config/db");
+const { User, Skills } = require("../config/db");
 
 module.exports = (route) => {
   route.get("/", async (req, res) => {
-    res.render("index.ejs");
+    const user = await User.find()
+    const skills = await Skills.find({authorID: user[0]._id})
+
+    res.render("index.ejs", {user: user[0], skills: skills});
   });
+
   route.get("/dashboard", checkAuthenticated, async (req, res) => {
-    res.render("dashboard.ejs", { user: req.user });
+    const skills = await Skills.find({authorID: req.user._id})
+    res.render("dashboard.ejs", { user: req.user, skills: skills });
   });
 
   route.get("/login", checkNotAuthenticated, (req, res) => {
