@@ -1,4 +1,4 @@
-const { User, Skills } = require("../config/db");
+const { User, Skills, Works } = require("../config/db");
 const {
   checkAuthenticated,
   checkNotAuthenticated,
@@ -9,9 +9,11 @@ const initializePassport = require("../middleware/passport");
 initializePassport(passport);
 
 const { for_register, update_user } = require("../middleware/Joi");
+const { upload } = require("../middleware/upload");
+const fs = require("fs");
 
 module.exports = (route) => {
-  // Authentification
+  // Start USer
   route.post("/reg", async (req, res) => {
     try {
       const { fullname, password, username, regkey } =
@@ -74,11 +76,35 @@ module.exports = (route) => {
           res.send(err).status(400);
         });
     } catch (error) {
-      console.log(error);
       res.send(error);
     }
   });
 
+  route.put(
+    "/set_avatar",
+    checkAuthenticated,
+    upload.single("avatar"),
+    async (req, res) => {
+      const user = await User.findOne({_id:req.user._id})
+      fs.unlinkSync(user.avatar);
+      await User.findOneAndUpdate(
+        {
+          _id: req.user._id,
+        },
+        {
+          avatar: `uploads/${req.file.filename}`,
+        }
+      )
+        .then((data) => {
+          res.send({ msg: "Update Avatar" });
+        })
+        .catch((err) => {
+          res.send(err).status(400);
+        });
+    }
+  );
+
+  // End USer
   // route.post("/change-password", checkAuthenticated, async (req, res) => {
   //   const { username, password, confirm } = user.validate(req.body);
   //   if (password !== confirm) {
@@ -128,4 +154,42 @@ module.exports = (route) => {
       });
   });
   // END Skills
+
+  // START Works
+
+  route.post(
+    "/add_works",
+    checkAuthenticated,
+    upload.any(),
+    async (req, res) => {
+      const { name } = req.body;
+      await Works.create({
+        authorID: req.user._id,
+        name,
+        img: `uploads/${req.files[0].filename}`,
+      })
+        .then((data) => {
+          res.send({ msg: "Work Add" });
+        })
+        .catch((err) => {
+          res.send(err).status(400);
+        });
+    }
+  );
+
+  route.delete("/delete_work", checkAuthenticated, async (req, res) => {
+    const { id } = req.body;
+    await Works.findByIdAndDelete({
+      _id: id,
+    })
+      .then((data) => {
+        fs.unlinkSync(data.img);
+        res.send({ msg: "Work Deleted!" });
+      })
+      .catch((err) => {
+        res.send(err).status(400);
+      });
+  });
+
+  // END Works
 };

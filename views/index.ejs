@@ -75,6 +75,21 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    <style>
+      body::-webkit-scrollbar {
+        width: 0.5em;
+        background: white;
+      }
+       
+      body::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+       
+      body::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 10px;
+      }
+    </style>
   </head>
 
   <body
@@ -446,11 +461,19 @@
           >
             <div class="flex flex-col lg:flex-row justify-center items-center">
               <div class="rounded-full border-8 border-primary shadow-xl">
-                <img
-                  src="/public/img/shazik.jpg"
+                <% if (user.avatar) { %>
+                  <img
+                  src="<%= user.avatar %>"
                   class="h-48 sm:h-56 rounded-full"
                   alt="author"
                 />
+                <% } else { %>
+                  <img
+                  src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                  class="h-48 sm:h-56 rounded-full"
+                  alt="author"
+                />
+                  <% } %> 
               </div>
               <div class="lg:pl-8 pt-8 sm:pt-10 lg:pt-0">
                 <h1
@@ -465,8 +488,7 @@
                 >
                   Hello I'm <%= user.fullname %> !
                 </h1>
-                <p class="text-center
-                sm:text-left text-white w-72 sm:w-96 italic my-3 sm:my-4">
+                <p class="sm:text-left text-center text-white w-72 sm:w-96 italic my-3 sm:my-4">
                   " <%= user.status %> "
                 </p>
                 <div
@@ -755,7 +777,7 @@
               md:pt-12
             "
           >
-            <div
+            <!-- <div
               class="
                 shadow
                 px-8
@@ -858,10 +880,12 @@
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 </p>
               </div>
-            </div>
+            </div> -->
             <div
               class="
                 shadow
+                border
+                border-gray-300
                 px-8
                 py-12
                 hover:bg-primary
@@ -896,7 +920,7 @@
                     group-hover:text-yellow
                   "
                 >
-                  Mobile Development
+                  SMM Design
                 </h3>
                 <p
                   class="
@@ -907,11 +931,12 @@
                     group-hover:text-white
                   "
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                I create a design for your Social Networks. It will be creative and understandable.
                 </p>
               </div>
             </div>
-            <div
+
+            <!-- <div
               class="
                 shadow
                 px-8
@@ -962,10 +987,13 @@
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 </p>
               </div>
-            </div>
+            </div> -->
+            
             <div
               class="
                 shadow
+                border
+                border-gray-300
                 px-8
                 py-12
                 hover:bg-primary
@@ -1000,7 +1028,7 @@
                     group-hover:text-yellow
                   "
                 >
-                  Graphic Design
+                LOGO Design
                 </h3>
                 <p
                   class="
@@ -1011,13 +1039,15 @@
                     group-hover:text-white
                   "
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                I make a logo for your company. It will not be repeated and boring.
                 </p>
               </div>
             </div>
             <div
               class="
                 shadow
+                border
+                border-gray-300
                 px-8
                 py-12
                 hover:bg-primary
@@ -1052,7 +1082,7 @@
                     group-hover:text-yellow
                   "
                 >
-                  Web Design
+                BRANDING
                 </h3>
                 <p
                   class="
@@ -1063,7 +1093,7 @@
                     group-hover:text-white
                   "
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                I improve your brand and your design of brand.
                 </p>
               </div>
             </div>
@@ -1110,46 +1140,14 @@
               pt-12
             "
           >
-            <a
-              href="/"
-              class="mx-auto md:mx-0 transition-all transform hover:scale-105"
-            >
+            <% works.forEach(work => { %>
               <img
-                src="/public/img/portfolio-apple.jpeg"
-                class="shadow w-full"
+                src="<%= work.img %> "
+                class="shadow w-full h-80 object-cover object-center transform duration-300 hover:scale-105"
                 alt="portfolio image"
               />
-            </a>
-            <a
-              href="/"
-              class="mx-auto md:mx-0 transition-all transform hover:scale-105"
-            >
-              <img
-                src="/public/img/portfolio-stripe.jpeg"
-                class="shadow w-full"
-                alt="portfolio image"
-              />
-            </a>
-            <a
-              href="/"
-              class="mx-auto md:mx-0 transition-all transform hover:scale-105"
-            >
-              <img
-                src="/public/img/portfolio-fedex.jpeg"
-                class="shadow w-full"
-                alt="portfolio image"
-              />
-            </a>
-            <a
-              href="/"
-              class="mx-auto md:mx-0 transition-all transform hover:scale-105"
-            >
-              <img
-                src="/public/img/portfolio-microsoft.jpeg"
-                class="shadow w-full"
-                alt="portfolio image"
-              />
-            </a>
+
+            <% }) %>
           </div>
         </div>
 
@@ -1824,6 +1822,7 @@
               items-center
               justify-center
               sm:justify-start
+              gap-4
               pt-5
               sm:pt-0
             "
@@ -1839,25 +1838,28 @@
                 "
               ></i>
             </a>
-            <a href="/" class="pl-4">
+            <a href="/">
               <i
                 class="bx bxl-twitter text-white hover:text-yellow text-2xl"
               ></i>
             </a>
-            <a href="/" class="pl-4">
+            <a href="/">
               <i
                 class="bx bxl-dribbble text-white hover:text-yellow text-2xl"
               ></i>
             </a>
-            <a href="/" class="pl-4">
+            <a href="/">
               <i
                 class="bx bxl-linkedin text-white hover:text-yellow text-2xl"
               ></i>
             </a>
-            <a href="/" class="pl-4">
+            <a href="/">
               <i
                 class="bx bxl-instagram text-white hover:text-yellow text-2xl"
               ></i>
+            </a>
+            <a class="uppercase text-white border px-2 rounded hover:text-red-500 hover:border-red-500" href="/dashboard">
+              Settings
             </a>
           </div>
         </div>

@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb)=>{
         const ext = file.mimetype.split('/')[1];
-        cb(null, `${slugify(file.originalname, {
+        cb(null, `${slugify(file.originalname.split('.')[0], {
             replacement: '-',
             remove: undefined,
             lower: true,

@@ -45,6 +45,8 @@ app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 app.use("/public", express.static("public"));
+app.use("/uploads", express.static("uploads"));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', routes);

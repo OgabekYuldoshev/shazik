@@ -1,3 +1,4 @@
+
 async function userUpdate(e) {
   e.preventDefault();
   await axios
@@ -31,7 +32,6 @@ async function userUpdate(e) {
 
 async function changePassword(e) {
   e.preventDefault();
-  console.log(e.target.elements["password"].value);
   await axios
     .post("/change-password", {
       username: e.target.elements["username"].value,
@@ -58,7 +58,6 @@ async function changePassword(e) {
 
 async function add_skills(e) {
   e.preventDefault();
-  // console.log(e.target.elements["password"].value)
   await axios
     .post("/add_skills", {
       name: e.target.elements["name"].value,
@@ -86,7 +85,7 @@ async function add_skills(e) {
 async function delete_skill(id) {
   await axios
     .delete("/delete_skill", {
-      data:{id}
+      data: { id },
     })
     .then((res) => {
       $("#alert-text").text(res.data.msg);
@@ -134,3 +133,90 @@ async function register(e) {
       }, 2000);
     });
 }
+
+async function add_works(e) {
+  e.preventDefault();
+  const work_data = new FormData();
+  work_data.append("name", e.target.elements["name"].value);
+  work_data.append("img", e.target.elements["img"].files[0]);
+
+  await axios
+    .post("/add_works", work_data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      $("#alert-text").text(res.data.msg);
+      $("#alert")
+        .addClass("bg-green-100 border-green-400 text-green-700")
+        .fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+      location.reload();
+    })
+    .catch((err) => {
+      $("#alert-text").text(err);
+      $("#alert").addClass("bg-red-100 border-red-400 text-red-700").fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+    });
+}
+
+async function delete_work(id) {
+  await axios
+    .delete("/delete_work", {
+      data: { id },
+    })
+    .then((res) => {
+      $("#alert-text").text(res.data.msg);
+      $("#alert")
+        .addClass("bg-green-100 border-green-400 text-green-700")
+        .fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+      location.reload();
+    })
+    .catch((err) => {
+      $("#alert-text").text(err);
+      $("#alert").addClass("bg-red-100 border-red-400 text-red-700").fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+    });
+}
+
+async function set_avatar(e) {
+  e.preventDefault();
+  const avatar = new FormData();
+  // work_data.append("name", e.target.elements["name"].value);
+  avatar.append("avatar", e.target.elements["avatar"].files[0]);
+
+  await axios
+    .put("/set_avatar", avatar, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      $("#alert-text").text(res.data.msg);
+      $("#alert")
+        .addClass("bg-green-100 border-green-400 text-green-700")
+        .fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+      location.reload();
+    })
+    .catch((err) => {
+      $("#alert-text").text(err);
+      $("#alert").addClass("bg-red-100 border-red-400 text-red-700").fadeIn();
+      setTimeout(() => {
+        $("#alert").fadeOut();
+      }, 2000);
+    });
+}
+

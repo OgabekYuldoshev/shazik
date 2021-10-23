@@ -1,29 +1,92 @@
-<form class="w-1/3 p-5 rounded bg-white col-span-4 row-span-1">
-    <h1 class="text-center uppercase font-medium">Add Works</h1>
-    <div class="w-full gap-2">
-        <div>
-            <label class="label">
-                <span class="label-text">Work Name</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter work name"
-                class="input w-full input-sm rounded"
-              />
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text">Upload Work Img</span>
-              </label>
-              <input
-                type="file"
-                accept="image/jpg, image/png, image/jpeg"
-                name="img"
-                class="input w-full input-sm rounded border border-gray-500"
-              />
-        </div>
+<div id="works" class="bg-white w-full h-64 rounded p-5 overflow-y-scroll grid grid-cols-2 sm:grid-cols-4 gap-5">
+  <% if (works.length !== 0) { %> <% works.forEach(work => { %>
+  <label for="<%= work._id %>" class="modal-button">
+    <img
+      ondblclick="delete_work('<%= work._id %>')"
+      class="
+        object-cover
+        block
+        w-72
+        h-40
+        rounded
+        transform
+        hover:scale-105
+        duration-300
+      "
+      src="<%= work.img %> "
+      alt="<%= work.name %> "
+    />
+  </label>
+  <input type="checkbox" id="<%= work._id %>" class="modal-toggle" />
+  <div class="modal">
+    <div class="modal-box flex items-center justify-center flex-col">
+      <div class="flex flex-col items-center justify-center">
+        <img
+          ondblclick="delete_work('<%= work._id %>')"
+          class="
+            object-cover
+            w-36
+            h-24
+            rounded
+            transform
+            hover:scale-105
+            duration-300
+          "
+          src="<%= work.img %> "
+          alt="<%= work.name %> "
+        />
+        <p class="text-uppercase text-xl">Do you want to delete it ?</p>
       </div>
-  <button type="submit" class="btn btn-outline btn-sm w-full mt-5">Upload and Save</button>
-
+      <div class="mt-5">
+        <label
+          for="<%= work._id %>"
+          onclick="delete_work('<%= work._id %>')"
+          class="btn btn-sm btn-error"
+          >Delete</label
+        >
+        <label for="<%= work._id %>" class="btn btn-sm">Close</label>
+      </div>
+    </div>
+  </div>
+  <% }) %> <% } else { %>
+  <h1 class="uppercase text-center mt-20 w-full font-bold text-gray-500">
+    Works are Empty !
+  </h1>
+  <% } %>
+</div>
+<form
+  onsubmit="add_works(event)"
+  enctype="multipart/form-data"
+  class="sm:w-1/3 w-full p-5 rounded bg-white col-span-4 row-span-1"
+>
+  <h1 class="text-center uppercase font-medium">Add Works</h1>
+  <div class="w-full gap-2">
+    <div>
+      <label class="label">
+        <span class="label-text">Work Name</span>
+      </label>
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter work name"
+        class="input w-full input-sm rounded"
+        required
+      />
+    </div>
+    <div>
+      <label class="label">
+        <span class="label-text">Upload Work Img</span>
+      </label>
+      <input
+        type="file"
+        accept="image/jpg, image/png, image/jpeg"
+        name="img"
+        class="input w-full input-sm rounded border border-gray-500"
+        required
+      />
+    </div>
+  </div>
+  <button type="submit" class="btn btn-outline btn-sm w-full mt-5">
+    Upload and Save
+  </button>
 </form>

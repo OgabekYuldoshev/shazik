@@ -1,6 +1,22 @@
+<form onsubmit="set_avatar(event)" class="form-control flex flex-col w-full py-2 my-2 border-t gap-2">
+  <div>
+    <label class="label">
+      <span class="label-text">Set Avatar</span>
+    </label>
+    <input
+    id="avatar"
+    accept="image/jpg, image/png, image/jpeg"
+    name="avatar"
+    type="file"
+    class="input w-full input-sm rounded"
+    required
+  />
+  </div>
+  <button type="submit" class="btn btn-outline btn-sm">Save</button>
+</form>
 <form
   onsubmit="userUpdate(event)"
-  class="form-control flex flex-col w-full py-2 my-2 border-t gap-2"
+  class="form-control flex flex-col w-full py-2 mb-2 border-t gap-2"
 >
   <div>
     <label class="label">

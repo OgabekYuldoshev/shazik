@@ -21,6 +21,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Dashboard</title>
+    <style>
+      body::-webkit-scrollbar {
+        width: 0.5em;
+        background: white;
+      }
+       
+      body::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+       
+      body::-webkit-scrollbar-thumb {
+        background-color: lightgray;
+        border-radius: 10px;
+      }
+      #sidebar::-webkit-scrollbar {
+        width: 0.5em;
+        background: white;
+      }
+       
+      #sidebar::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+       
+      #sidebar::-webkit-scrollbar-thumb {
+        background-color: lightgray;
+        border-radius: 10px;
+      }
+      #works::-webkit-scrollbar {
+        width: 0.3em;
+        background: white;
+      }
+       
+      #works::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+       
+      #works::-webkit-scrollbar-thumb {
+        background-color: lightgray;
+        border-radius: 10px;
+      }
+    </style>
   </head>
   <body class="bg-primary min-h-screen">
     <%- include("./partials/alert.ejs") -%>

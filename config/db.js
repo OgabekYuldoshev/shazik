@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const UserSchema = new Schema({
+    avatar:{
+        type: String,
+    },
     username:{
         type: String,
         required: true
@@ -50,8 +53,25 @@ const UserSchema = new Schema({
       }
   })
 
+  const WorksSchema = new Schema({
+    authorID: {
+        type: String,
+        required: true
+    },
+    name:{
+        type: String,
+        required: true
+    },
+    img:{
+        type: String,
+        required: true
+    }
+})
+
 const User = mongoose.model("user", UserSchema);
 const Skills = mongoose.model("skills", SkillsSchema);
+const Works = mongoose.model("works", WorksSchema);
 
 
-module.exports = { User, Skills };
+
+module.exports = { User, Skills, Works };
