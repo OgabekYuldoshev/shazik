@@ -54,7 +54,6 @@ module.exports = (route) => {
 
   route.post("/update-user", checkAuthenticated, async (req, res) => {
     try {
-      await update_user.validateAsync(req.body);
       const { fullname, about, address, status, position, phone, email } =
         req.body;
       await User.findOneAndUpdate(
